@@ -3,6 +3,9 @@
 	"version": "1.0.0",
 	"description": "JS typeof replacement!",
 	"main": "index.js",
+	"repository": {
+		"url": "https://github.com/S-STALWART-S/custom-typeof"
+	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
