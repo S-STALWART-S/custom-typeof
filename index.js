@@ -1,7 +1,6 @@
 const lodash = require("lodash");
 
-const enNumber = new RegExp("^[0-9]+$");
-const regex = { enNumber };
+const { regex } = require("./variables");
 
 class CustomTypeof {
 	constructor() {
