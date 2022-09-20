@@ -43,6 +43,8 @@ const arr1 = [],
 	arr2 = [],
 	arr3 = [];
 log(customTypeof.isArray(arr1, arr2, arr3)); // true
+
+log(customTypeof.isObject([], {})); // false, with default typeof you get true for arrays
 ```
 
 **All methods you have:**
