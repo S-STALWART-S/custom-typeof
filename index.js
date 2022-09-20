@@ -1,5 +1,3 @@
-const lodash = require("lodash");
-
 const { regex } = require("./variables");
 
 class CustomTypeof {
@@ -44,6 +42,11 @@ class CustomTypeof {
 		};
 	}
 
+	#typeUpperFirst(type) {
+		let typeParts = type.split("");
+		typeParts[0] = typeParts[0].toUpperCase();
+		return typeParts.join("");
+	}
 	check(value) {
 		const type = this.#getTypesWithFalseValues();
 
@@ -62,7 +65,7 @@ class CustomTypeof {
 			type.isNull = true;
 			type.isNotNull = false;
 		} else {
-			const uppercaseType = lodash.upperFirst(typeof value);
+			const uppercaseType = this.#typeUpperFirst(typeof value);
 			type[`is${uppercaseType}`] = true;
 			type[`isNot${uppercaseType}`] = false;
 		}

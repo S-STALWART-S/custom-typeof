@@ -10,9 +10,6 @@
 		"url": "https://github.com/S-STALWART-S/custom-typeof"
 	},
 	"scripts": {},
-	"dependencies": {
-		"lodash": "^4.17.21"
-	},
 	"keywords": [
 		"typeof",
 		"type",
