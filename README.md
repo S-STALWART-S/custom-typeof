@@ -32,10 +32,11 @@ const someString = "1234567890";
 log(check(someString).type.isString); // ofc is true
 log(check(someString).type.isStringNumber); // true!
 
-const custom = "custom",
-	typeOf = "typeof";
-if (check(custom, typeOf).type.isNotUndefined) {
-	log("Is not undefined!");
+const firstName = "John";
+const lastName = "Doe";
+const { isNotUndefined } = check(firstName, lastName).type;
+if (isNotUndefined) {
+	log("Yay!"); // Yay!
 }
 
 const arr1 = [],
