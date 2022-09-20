@@ -8,11 +8,16 @@ class CustomTypeof {
 	}
 
 	#isEveryTypeCheckTrue(items = [], type) {
+		if (!items.length) return false;
 		return items.every((value) => typeof value === type);
 	}
 	#isEveryTypeCheckFalse(items = [], type) {
+		if (!items.length) return false;
 		return items.every((value) => typeof value !== type);
 	}
+	// #isSomeTypeCheckTrue(items = [], type) {
+	// 	return items.some((item) => typeof item === type);
+	// }
 	#getTypesWithFalseValues() {
 		return {
 			isArray: false,
@@ -66,6 +71,7 @@ class CustomTypeof {
 	}
 
 	isNaN(...items) {
+		if (!items.length) return false;
 		return items.every((value) => isNaN(value));
 	}
 	isNotNaN(...items) {
@@ -80,9 +86,14 @@ class CustomTypeof {
 	}
 
 	isArray(...items) {
+		if (!items.length) return false;
 		return items.every((value) => Array.isArray(value));
 	}
+	isSomeArray(...items) {
+		return items.some((item) => Array.isArray(item));
+	}
 	isNotArray(...items) {
+		if (!items.length) return false;
 		return items.every((value) => !Array.isArray(value));
 	}
 
@@ -101,9 +112,11 @@ class CustomTypeof {
 	}
 
 	isStringNumber(...items) {
+		if (!items.length) return false;
 		return items.every((item) => regex.enNumber.test(item));
 	}
 	isNotStringNumber(...items) {
+		if (!items.length) return false;
 		return items.every((item) => !regex.enNumber.test(item));
 	}
 
@@ -115,17 +128,24 @@ class CustomTypeof {
 	}
 
 	isTruthy(...items) {
+		if (!items.length) return false;
 		return items.every((item) => !!item === true);
 	}
 	isFalsy(...items) {
+		if (!items.length) return false;
 		return items.every((item) => !!item === false);
 	}
 
 	isObject(...items) {
+		if (this.isSomeArray(...items)) return false;
 		return this.#isEveryTypeCheckTrue(items, "object");
 	}
 	isNotObject(...items) {
-		return this.#isEveryTypeCheckFalse(items, "object");
+		const itemsFilteredFromArray = items.filter((item) => !Array.isArray(item));
+
+		return itemsFilteredFromArray.length
+			? this.#isEveryTypeCheckFalse(itemsFilteredFromArray, "object")
+			: true;
 	}
 
 	isString(...items) {
