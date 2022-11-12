@@ -25,6 +25,7 @@ class CustomTypeof {
 			isNull: false,
 			isNumber: false,
 			isObject: false,
+			isObjectNative: false,
 			isString: false,
 			isStringNumber: false,
 			isUndefined: false,
@@ -36,6 +37,7 @@ class CustomTypeof {
 			isNotNull: true,
 			isNotNumber: true,
 			isNotObject: true,
+			isNotObjectNative: true,
 			isNotString: true,
 			isNotStringNumber: true,
 			isNotUndefined: true,
@@ -92,7 +94,7 @@ class CustomTypeof {
 		if (!items.length) return false;
 		return items.every((value) => Array.isArray(value));
 	}
-	isSomeArray(...items) {
+	#isSomeItemsArray(...items) {
 		return items.some((item) => Array.isArray(item));
 	}
 	isNotArray(...items) {
@@ -140,7 +142,10 @@ class CustomTypeof {
 	}
 
 	isObject(...items) {
-		if (this.isSomeArray(...items)) return false;
+		if (this.#isSomeItemsArray(...items)) return false;
+		return this.#isEveryTypeCheckTrue(items, "object");
+	}
+	isObjectNative(...items) {
 		return this.#isEveryTypeCheckTrue(items, "object");
 	}
 	isNotObject(...items) {
@@ -149,6 +154,9 @@ class CustomTypeof {
 		return itemsFilteredFromArray.length
 			? this.#isEveryTypeCheckFalse(itemsFilteredFromArray, "object")
 			: true;
+	}
+	isNotObjectNative(...items) {
+		return this.#isEveryTypeCheckFalse(items, "object");
 	}
 
 	isString(...items) {
