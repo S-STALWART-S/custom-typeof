@@ -172,6 +172,11 @@ class CustomTypeof {
 	isNotUndefined(...items) {
 		return this.#isEveryTypeCheckFalse(items, "undefined");
 	}
+
+	typeof(value) {
+		if (this.isArray(value)) return "array";
+		return typeof value;
+	}
 }
 
 const customTypeof = new CustomTypeof();
